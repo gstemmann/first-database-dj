@@ -12,15 +12,15 @@
     <ul>
     <div class="form-group row">
       
-        <label class="col-sm-2 col-form-label"></label>
+        
         <div class="col-sm-6">
-          {% for song in songs %}
+          {% for s in playlist.songs %}
 
           <input type="checkbox"
-                 class="form-control"
+                 
                  name="song"> 
                  
-                 <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
+                 <li>title: {{ s.title }} <br> artist: {{ s.artist }}</li>
                {% endfor %}
                </ul>
         </div>
