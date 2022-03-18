@@ -40,10 +40,9 @@ class PlaylistSong(db.Model):
     __tablename__ = "playlists_songs"
 
     id = db.Column(db.Integer, primary_key=True)
-    song_id = db.Column(db.Integer,
-                       db.ForeignKey("songs.id"))
+    song_id = db.Column(db.Integer, db.ForeignKey("songs.id"),  primary_key=True)
     playlist_id = db.Column(db.Integer,
-                          db.ForeignKey("playlists.id"))
+                          db.ForeignKey("playlists.id"), primary_key=True)
 
     def __repr__(self):
         return f"<PlaylistSong {self.id} {self.song_id} {self.playlist_id} >"

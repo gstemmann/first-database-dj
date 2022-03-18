@@ -6,25 +6,16 @@
 
  
 <form method="POST">
-    {{ form.csrf_token }}
-    {{ form.hidden_tag() }}
-    {{ form.playlist }}
+      {{ form.csrf_token }}
+      {{ form.playlist }}
+      {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+    
+    
     <ul>
-    <div class="form-group row">
-      
-        
-        <div class="col-sm-6">
-          {% for s in playlist.songs %}
-
-          <input type="checkbox"
-                 
-                 name="song"> 
-                 
-                 <li>title: {{ s.title }} <br> artist: {{ s.artist }}</li>
-               {% endfor %}
-               </ul>
-        </div>
-      </div>
+      {% for song in songs %}
+        <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
+      {% endfor %}
+      </ul>
     <button type="submit">Submit</button>
 </form>
 
