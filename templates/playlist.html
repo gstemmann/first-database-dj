@@ -9,12 +9,10 @@
   {% endif %}
 </div>
 <ul>
-{{ songs }}
-
-  {% for song in songs.title %}
-  <li>{{ song }}</li>
+  {% for song in songs %}
+    <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
   {% endfor %}
-</ul>
+  </ul>
 <p>
   <a class="btn btn-primary" href="/playlists/{{ playlist.id }}/add-song">
     Add Song To Playlist

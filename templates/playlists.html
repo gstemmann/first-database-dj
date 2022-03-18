@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h1>See all the playlists!</h1>
+<h1>All the playlists</h1>
 
 <ul>
 {% for playlist in playlists %}
   <li>
-     <a href="/playlists/{{ playlist.id }}">{{ playlist.name }}</a>
+     <a href="/playlists/{{ playlist.id }}">{{ playlist.name }}</a> - {{ playlist.description }}
   </li>
 {% endfor %}
 </ul>

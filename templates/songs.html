@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<h1>Check out the songs!</h1>
+<h1>All the songs!</h1>
 
 <ul>
 {% for song in songs %}
-  <li><a href="/songs/{{song.id}}">{{ song.title }}</a></li>
+  <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
 {% endfor %}
 </ul>
 

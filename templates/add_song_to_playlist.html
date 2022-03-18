@@ -4,20 +4,28 @@
 
 <h1>Add a song to {{ playlist.name }}</h1>
 
-<!-- <form method="POST">
+ 
+<form method="POST">
     {{ form.csrf_token }}
     {{ form.hidden_tag() }}
     {{ form.playlist }}
-
+    <ul>
     <div class="form-group row">
+      
         <label class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
+          {% for song in songs %}
+
           <input type="checkbox"
                  class="form-control"
-                 name="song">
+                 name="song"> 
+                 
+                 <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
+               {% endfor %}
+               </ul>
         </div>
       </div>
     <button type="submit">Submit</button>
-</form> -->
+</form>
 
 {% endblock %}
