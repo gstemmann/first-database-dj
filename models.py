@@ -11,7 +11,7 @@ class Playlist(db.Model):
     """Playlist."""
     __tablename__ = "playlists"
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
@@ -24,7 +24,7 @@ class Song(db.Model):
     """Song."""
     __tablename__ = "songs"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)
     artist = db.Column(db.Text, nullable=False)
 
