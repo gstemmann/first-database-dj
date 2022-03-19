@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Add a song to {{ playlist.name }}</h1>
-
- 
+<h1> Playlist name is:
+  {{ playlist.name }}
+</h1>
+<h2>This playlist is:
+ {{ playlist.description }}
+</h2>
 <form method="POST">
-      {{ form.csrf_token }}
-      {{ form.playlist }}
-      {{ form.hidden_tag() }} <!--add type=hidden form fields -->
-    
-    
-    <ul>
-      {% for song in songs %}
-        <li>title: <a href="/songs/{{song.id}}">{{ song.title }}</a> <br> artist: {{ song.artist }}</li>
-      {% endfor %}
-      </ul>
-    <button type="submit">Submit</button>
+  {{ form.csrf_token }}
+
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="form-group">
+    {{ field.label }}
+    {{ field(class_="form-control") }}
+  </div>
+  {% endfor %}
+
+  <button class="btn btn-primary">Add</button>
+
 </form>
 
 {% endblock %}

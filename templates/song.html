@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-DISPLAY ALL OF THE PLAYLISTS THAT THIS SONG IS A PART OF
 <div class="jumbotron">
   <h1>{{ song.title }}!</h1>
   <p class="lead">&ndash; {{ song.artist }}</p>
@@ -9,9 +8,9 @@ DISPLAY ALL OF THE PLAYLISTS THAT THIS SONG IS A PART OF
 
 <ul>
   
-  {% for user in users %}
+  {% for playlist in playlists %}
   <li>
-    <a href="/playlists/{{ playlists.id }}">{{ song.playslist_id.title }}</a>
+    <a href="/songs/{{ songs.id }}">{{ playlist.name }}</a>
   </li>
   {% endfor %}
 </ul>

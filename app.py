@@ -13,7 +13,7 @@ connect_db(app)
 db.create_all()
 
 app.config['SECRET_KEY'] = "I'LL NEVER TELL!!"
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
 
@@ -43,7 +43,6 @@ def show_playlist(playlist_id):
     playlist = Playlist.query.get_or_404(playlist_id)
     # song_id = Playlist.query.get(playlist_id.songs)
     # songs = .query.get_or_404(song_id)
-
 
     songs = [s.title for s in playlist.songs]
     # songs = PlaylistSong.query.get_or_404(curr_on_playlist)
@@ -86,7 +85,6 @@ def add_playlist():
 @app.route("/songs")
 def show_all_songs():
     """Show list of songs."""
-
     songs = Song.query.all()
     return render_template("songs.html", songs=songs)
 
@@ -136,7 +134,6 @@ def add_song_to_playlist(playlist_id):
     """Add a playlist and redirect to list."""
 
     playlist = Playlist.query.get_or_404(playlist_id)
-    songs = Song.query.all()
     form = NewSongForPlaylistForm()
 
     # Restrict form to songs not already on this playlist
@@ -145,24 +142,23 @@ def add_song_to_playlist(playlist_id):
     form.song.choices = (db.session.query(Song.id, Song.title)
                         .filter(Song.id.notin_(curr_on_playlist))
                         .all())
-
+    print('****************')
+    print(curr_on_playlist)
+    print('****************')
     if form.validate_on_submit():
 
         # This is one way you could do this ...
-        # playlist_song = PlaylistSong(song_id=form.song.data,
-        #                             playlist_id=playlist_id)
-        # db.session.add(playlist_song)
+        playlist_song = PlaylistSong(song_id=form.song.data,
+                                    playlist_id=playlist_id)
+        db.session.add(playlist_song)
 
         # Here's another way you could that is slightly more ORM-ish:
         #
-        song = Song.query.get(form.song.data)
-        playlist.songs.append(song)
-
-        # Either way, you have to commit:
+        # song = Song.query.get(form.song.data)
+        # playlist.songs.append(song)
         db.session.commit()
 
         return redirect(f"/playlists/{playlist_id}")
 
-    return render_template("add_song_to_playlist.html",
-                            playlist=playlist,
-                            form=form, songs=songs)
+    else:
+        return render_template("add_song_to_playlist.html", playlist=playlist, form=form)
